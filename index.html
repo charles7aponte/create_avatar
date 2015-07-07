@@ -10,16 +10,219 @@
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
      <script src="js/misvg/snap.svg.js"></script>
+
+    <script src="js/misvg/GeneradorHtml.js"></script>
     <script src="js/misvg/rostro.js"></script>
 
     <style type="text/css">
       .parte{
       background: rgb(177, 173, 167);
-      height: 75px;
-      width: 75px;
+     height: 95px;
+        width: 95px;
       border: 5px solid #F4F4F4;  
+        padding: 0px;
+        margin: 3px;
+          overflow: hidden;
+
       }
 
+      .parte_activo{
+          border: 5px solid #E6007E !important;
+      }
+
+      .parte>img{
+        height: 95px;
+        width: 95px;
+      }
+
+
+
+  
+    .parte>img:hover{
+      
+     -webkit-transform:scale(1.3) rotate(0deg);
+    -moz-transform:scale(1.3) rotate(0deg);
+    -ms-transform:scale(1.3) rotate(0deg);
+    -o-transform:scale(1.3) rotate(0deg);
+    transform:scale(1.3) rotate(0deg);
+    cursor: pointer;
+
+
+    }
+
+      #rostros>svg{
+        background: #B7CE02;
+      }
+
+
+
+    .parte>img{
+      -webkit-transform:scale(1) rotate(0deg);
+      -moz-transform:scale(1) rotate(0deg);
+      -ms-transform:scale(1) rotate(0deg);
+      -o-transform:scale(1) rotate(0deg);
+      transform:scale(1) rotate(0deg);
+      -webkit-transition:all .3s ease-in-out;
+      -moz-transition:all .3s ease-in-out;
+      -o-transition:all .3s ease-in-out;
+      transition:all .3s ease-in-out
+    }
+
+    .parte:hover>img{
+      -webkit-transform:scale(1.3) rotate(8deg);
+      -moz-transform:scale(1.3) rotate(8deg);
+      -ms-transform:scale(1.3) rotate(8deg);
+      -o-transform:scale(1.3) rotate(8deg);
+      transform:scale(1.3) rotate(8deg);
+    }
+
+    td:hover .parte>img{
+      -webkit-transform:scale(1.3) rotate(0deg);
+      -moz-transform:scale(1.3) rotate(0deg);
+      -ms-transform:scale(1.3) rotate(0deg);
+      -o-transform:scale(1.3) rotate(0deg);
+      transform:scale(1.3) rotate(0deg);
+    }
+
+
+
+    .example-orbit-content>li>div {
+      color: white;
+      background: #EAEAEA;
+      padding: 30px 40px;
+    }
+
+
+    .contenedor_cuadro_imagenes{
+        height: 280px;
+          overflow-y: auto;
+    }
+
+     a.button[data-bton]{
+      color:rgb(241, 231, 231);
+      margin:2px;
+      background:rgb(31, 156, 197)
+    }
+
+
+    .parte_activa{
+        background-color: rgb(24, 109, 137) !important;
+        color: rgb(54, 138, 166) !important;
+    }
+
+
+
+  .container_rostrops_pagina{
+    display: flex;
+     flex-direction:row;
+     flex-wrap: wrap ;
+  }
+
+
+  .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+  }
+
+
+.btn {
+  display: inline-block;
+  padding: 3px 8px;
+  margin-bottom: 2px;
+ 
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+ 
+    background-color: #6CA82F;
+  color: rgb(252, 245, 245);
+  font-size: 18px;
+}
+
+.bton_activo{
+  background-color: #B7CE02 !important;
+  color: #76AD29 !important;
+}
+
+.btn:hover{
+    background-color: rgb(140, 197, 81);
+  color: rgb(108, 168, 47);
+}
+
+
+
+.elementos_izq_componentes{
+  height: 103px;
+  width: 114px;
+  margin-bottom: 5px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 3px;
+}
+
+.elementos_izq_componentes>.fondo_imagen{
+  width: 106px;
+  height: 84px;
+  
+  margin: 0 auto;
+}
+.elementos_izq_componentes:hover{
+    opacity: 0.6;
+    cursor: pointer;
+    background-color: rgba(132, 141, 141, 0.45);
+  border-radius: 11px;
+}
+
+.fondo_imagen_activo{
+  background-image: url('img/iconos_lateral/resalto.png');
+    background-repeat: no-repeat;
+  background-size: 113px;
+
+  opacity:1 !important;
+    cursor: default !important;
+    background-color: transparent !important;
+  border-radius: none !important;
+}
+
+.elementos_izq_componentes>.descripcion_imagen_componentes{
+  color: #77AC3A;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+
+.parte_colores{
+  margin-top: 5px;
+
+  width: 143px;
+  text-align: center;
+  height: 137px;
+
+}
+
+.parte_colores>.mis_colores{
+  width: 23px;
+  height: 23px;
+  margin-top: 5px;
+  background: #3030A0;
+  margin-left: 5px;
+  display: inherit;
+  border-radius: 37px;
+  display: inline-flex;
+    border: 2px solid #EEE8EE;
+}
     </style>
   </head>
   <body>
@@ -27,108 +230,464 @@
          
     
         <div class="row">
-          <div class="large-3 columns">
-            <h1></h1>
-          </div>
-
-          <div class="large-9 columns"  style="background:rgb(0, 140, 186)">
-              <div >
-                <dl class="sub-nav">
-                  <dd data-magellan-arrival="build"><a style="color:rgb(241, 231, 231)" href="#build">Build with HTML</a></dd>
-                  <dd data-magellan-arrival="js"><a style="color:rgb(241, 231, 231)"  href="#js">Arrival 2</a></dd>
-                </dl>
-              </div>
- 
-          </div>
           
+          <div class="columns" style="  border: 1px solid #E6E8E6;
+              border-radius: 28px;
+              width: 185px;
+              border: 1px solid #E6E8E6;
+              border-radius: 28px;
+              height: 35px;"></div>
 
-        </div>
+
+          <div class="columns "  style="width:585px; height:35px;  text-align: center;  margin-left: 28px;">
+            <div class="btn-group" role="group" aria-label="First group">
+              <div class="btn btn-default"  data-sep="1"  style="   border-radius: 10px 0px 0px 0px;">forma</div>
+              <div class="btn btn-default bton_activo" data-sep="2" >ojos</div>
+              <div class="btn btn-default" data-sep="3">cejas</div>
+              <div class="btn btn-default" data-sep="4" >nariz</div>
+              <div class="btn btn-default" data-sep="5" >boca</div>
+              <div class="btn btn-default" data-sep="6" >orejas</div>
+              <div class="btn btn-default" data-sep="7" >cabello</div>
+              <div class="btn btn-default" data-sep="8"   style="   border-radius: 0px 10px 0px 0px;">barba</div>
+           </div>
+          </div>
+
+
+
+          <div class="columns" style="width: 185px;
+              height: 35px;
+              border: 1px solid #E6E8E6;
+              border-radius: 28px;
+              padding-top: 23px;
+              padding-left: 31px;
+              padding-right: 31px;">
+
+           </div>
+      </div>
         
          
+
+
+
         
         
         <div class="row">    
           
            
-           
-          <div class="large-8 push-3 columns">
+          <div class="columns" style="  width: 185px;
+            height: 335px;
+            border: 1px solid #E6E8E6;
+            border-radius: 28px;
+            padding-top: 23px;
+            ">
             
-            <h3>Page Title <small>Page subtitle</small></h3>
-              <table>
-              <tbody>
-                <tr>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                </tr>
-                
-                 <tr>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                </tr>
+              <div  id="rostros" style="  width: 143px;
+                height: 143px;text-align: center;  border: 2px solid #98BB1D;
+                " >
 
-                 <tr>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                  <td><div class="parte"></div></td>
-                </tr>
-              </tbody>
-            </table>
+                 <svg version="1.1" id="rostro" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="211px" height="228.77px" viewBox="0 0 211 228.77" enable-background="new 0 0 211 228.77" xml:space="preserve">
+                    <g id="mi_cuerpo"></g>
+                    <g id="mi_forma"></g>
+                    <g id="mi_expresion"></g>   
+                    <g id="mi_oreja"></g>
+                     <g id="mi_ojos"></g>
+                     <g id="mi_ceja"></g>
+                     <g id="mi_boca"></g>
+                     <g id="mi_barba"></g>
+                       <g id="mi_nariz"></g>
+                     <g id="mi_cabello"></g>
+                      
+                   
+                </svg>
+              
+              
+              </div>
+
+
+              <!-- colores -->
+              <div class="parte_colores" id="panel_colores">
+
+                <div class="mis_colores" style="background-color:#008C85"></div>
+                 <div class="mis_colores" style="background-color:#92C020"></div>
+                 <div class="mis_colores" style="background-color:#B3BC12"></div>
+                 <div class="mis_colores"></div><div class="mis_colores"></div>
+                 <div class="mis_colores"></div><div class="mis_colores"></div>
+                 <div class="mis_colores"></div><div class="mis_colores"></div>
+                 <div class="mis_colores"></div><div class="mis_colores"></div>
+                 <div class="mis_colores"></div>
+
+                
+              </div>
+            
+              
+          </div>
+
+
+
+          <div class="columns" style="  border: 1px solid #E6E8E6;
+  border-radius: 28px;
+  padding-top: 23px;
+  padding-left: 31px;
+  padding-right: 31px;
+  width: 585px;
+  height: 336px;
+    margin-left: 28px;">
+
+
+
+     <div class="contenedor_cuadro_imagenes " data-seccion="1">
+                  <div class="container_rostrops_pagina" >
+
+                      <div class="parte  columns" data-accion="forma" data-posicion="n1" data-click="cargar"></div>
+                      
+                      <div class="parte  columns" data-accion="forma" data-posicion="n2" data-click="cargar"></div>
+                     
+                        <div class="parte  columns" data-accion="forma" data-posicion="n3" data-click="cargar"></div>
+
+                        <div class="parte  columns" data-accion="forma" data-posicion="n4" data-click="cargar"></div>
+                      
+                     
+                        <div class="parte columns" data-accion="forma" data-posicion="n5" data-click="cargar"></div>
+
+                        <div class="parte columns" data-accion="forma" data-posicion="n6" data-click="cargar"></div>
+
+                       
+                    
+                    
+                 </div>                 
+                
+              </div>
+
+
+
+
+
+  
+              <div class="contenedor_cuadro_imagenes " data-seccion="2">
+                  <div class="container_rostrops_pagina" >
+
+
+
+                      <div class="parte  columns" data-accion="ojos" data-posicion="n1" data-click="cargar"></div>
+                      
+                      <div class="parte  columns" data-accion="ojos" data-posicion="n2" data-click="cargar"></div>
+               
+
+                        <div class="parte  columns" data-accion="ojos" data-posicion="n4" data-click="cargar"></div>
+                      
+                     
+                        <div class="parte columns" data-accion="ojos" data-posicion="n5" data-click="cargar"></div>
+                      
+                      
+                        <div class="parte columns" data-accion="ojos" data-posicion="n6" data-click="cargar"></div>   
+
+                        <div class="parte columns" data-accion="ojos" data-posicion="n7" data-click="cargar"></div>   
+                 </div>                 
+                
+              </div>
+
+
+
+
+     <div class="contenedor_cuadro_imagenes " data-seccion="3">
+                  <div class="container_rostrops_pagina" >
+                  <div class="parte  columns" data-accion="ceja" data-posicion="eliminar" data-click="eliminar"></div>
+    
+
+                      <div class="parte  columns" data-accion="ceja" data-posicion="n1" data-click="cargar"></div>
+                      
+                      <div class="parte  columns" data-accion="ceja" data-posicion="n2" data-click="cargar"></div>
+                     
+                        <div class="parte  columns" data-accion="ceja" data-posicion="n3" data-click="cargar"></div>
+
+                        <div class="parte  columns" data-accion="ceja" data-posicion="n4" data-click="cargar"></div>
+                      
+                     
+                        <div class="parte columns" data-accion="ceja" data-posicion="n5" data-click="cargar"></div>
+                      
+                      
+                        <div class="parte columns" data-accion="ceja" data-posicion="n6" data-click="cargar"></div>   
+
+                        <div class="parte columns" data-accion="ceja" data-posicion="n7" data-click="cargar"></div>   
+                 </div>                 
+                
+              </div>
+            
+  
+
+
+
+
+            <div class="contenedor_cuadro_imagenes " data-seccion="4">
+                  <div class="container_rostrops_pagina" >
+
+                      <div class="parte  columns" data-accion="nariz" data-posicion="n1" data-click="cargar"></div>
+                      
+                      <div class="parte  columns" data-accion="nariz" data-posicion="n2" data-click="cargar"></div>
+                     
+                        <div class="parte  columns" data-accion="nariz" data-posicion="n3" data-click="cargar"></div>
+
+                        <div class="parte  columns" data-accion="nariz" data-posicion="n4" data-click="cargar"></div>
+                      
+                     
+                        <div class="parte columns" data-accion="nariz" data-posicion="n5" data-click="cargar"></div>
+                      
+                    
+                 </div>                 
+                
+              </div>
+
+
+
+
+
+
+
+
+
+              <div class="contenedor_cuadro_imagenes " data-seccion="5">
+                  <div class="container_rostrops_pagina" >
+
+                      <div class="parte  columns" data-accion="boca" data-posicion="n1" data-click="cargar"></div>
+                      
+                      <div class="parte  columns" data-accion="boca" data-posicion="n2" data-click="cargar"></div>
+                     
+                        <div class="parte  columns" data-accion="boca" data-posicion="n3" data-click="cargar"></div>
+
+                        <div class="parte  columns" data-accion="boca" data-posicion="n4" data-click="cargar"></div>
+                      
+                     
+                        <div class="parte columns" data-accion="boca" data-posicion="n5" data-click="cargar"></div>
+
+                        <div class="parte columns" data-accion="boca" data-posicion="n6" data-click="cargar"></div>
+
+                        <div class="parte columns" data-accion="boca" data-posicion="n7" data-click="cargar"></div>
+
+                        <div class="parte columns" data-accion="boca" data-posicion="n8" data-click="cargar"></div>
+
+
+                        <div class="parte columns" data-accion="boca" data-posicion="n9" data-click="cargar"></div>
+
+                    
+                    
+                 </div>                 
+                
+              </div>
+        
+
+
+
+
+  <div class="contenedor_cuadro_imagenes " data-seccion="6">
+                  <div class="container_rostrops_pagina" >
+
+                  <div class="parte  columns" data-accion="oreja" data-posicion="eliminar" data-click="eliminar"></div>
+    
+
+                      <div class="parte  columns" data-accion="oreja" data-posicion="n1" data-click="cargar"></div>
+                      
+                      <div class="parte  columns" data-accion="oreja" data-posicion="n2" data-click="cargar"></div>
+                     
+                        <div class="parte  columns" data-accion="oreja" data-posicion="n3" data-click="cargar"></div>
+
+                        <div class="parte  columns" data-accion="oreja" data-posicion="n4" data-click="cargar"></div>
+                      
+                     
+                        <div class="parte columns" data-accion="oreja" data-posicion="n5" data-click="cargar"></div>
+                      
+                      
+                        <div class="parte columns" data-accion="oreja" data-posicion="n6" data-click="cargar"></div>   
+
+                        <div class="parte columns" data-accion="oreja" data-posicion="n7" data-click="cargar"></div>   
+                 </div>                 
+                
+              </div>
+         
+            
+
+
+
+
+              <div class="contenedor_cuadro_imagenes " data-seccion="7">
+                  <div class="container_rostrops_pagina" >
+
+
+                      <div class="parte  columns " data-accion="cabello" data-posicion="eliminar" data-click="eliminar"></div>
+
+                      <div class="parte  columns" data-accion="cabello" data-posicion="n1" data-click="cargar"></div>
+                      
+                      <div class="parte  columns" data-accion="cabello" data-posicion="n2" data-click="cargar"></div>
+
+                     
+                        <div class="parte  columns" data-accion="cabello" data-posicion="n3" data-click="cargar"></div>
+                     
+
+                        <div class="parte  columns" data-accion="cabello" data-posicion="n4" data-click="cargar"></div>
+                      
+                     
+                        <div class="parte columns" data-accion="cabello" data-posicion="n5" data-click="cargar"></div>
+                      
+                      
+                        <div class="parte columns" data-accion="cabello" data-posicion="n6" data-click="cargar"></div>   
+
+                        <div class="parte columns" data-accion="cabello" data-posicion="n7" data-click="cargar"></div>
+
+                        <div class="parte columns" data-accion="cabello" data-posicion="n8" data-click="cargar"></div>
+
+  
+
+
+                  </div>                 
+                
+              </div>
+            
+
+
+
+
+              <div class="contenedor_cuadro_imagenes " data-seccion="8">
+                  <div class="container_rostrops_pagina" >
+
+
+                      <div class="parte  columns " data-accion="barba" data-posicion="eliminar" data-click="eliminar"></div>
+
+                      <div class="parte  columns" data-accion="barba" data-posicion="n1" data-click="cargar"></div>
+                      
+                      <div class="parte  columns" data-accion="barba" data-posicion="n2" data-click="cargar"></div>
+
+                    
+                        <div class="parte  columns" data-accion="barba" data-posicion="n3" data-click="cargar"></div>
+                    
+                        <div class="parte  columns" data-accion="barba" data-posicion="n4" data-click="cargar"></div>
+                      
+                     
+                        <div class="parte columns" data-accion="barba" data-posicion="n5" data-click="cargar"></div>
+                      
+                      
+                        <div class="parte columns" data-accion="barba" data-posicion="n6" data-click="cargar"></div>   
+
+                        <div class="parte columns" data-accion="barba" data-posicion="n7" data-click="cargar"></div>   
+
+                        <div class="parte columns" data-accion="barba" data-posicion="n8" data-click="cargar"></div> 
+
+                        <div class="parte columns" data-accion="barba" data-posicion="n9" data-click="cargar"></div> 
+
+                        <div class="parte columns" data-accion="barba" data-posicion="n10" data-click="cargar"></div> 
+
+                        <div class="parte columns" data-accion="barba" data-posicion="n11" data-click="cargar"></div> 
+
+                        <div class="parte columns" data-accion="barba" data-posicion="n12" data-click="cargar"></div> 
+
+                        <div class="parte columns" data-accion="barba" data-posicion="n13" data-click="cargar"></div> 
+                 </div>                 
+                
+              </div>
+            
+ 
+
+
+        
+
+
+
+
+
+
+
+
+  
+            
+  
+
+
+
+
+         
+
+
+ 
+  
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+           
+              
                   
           </div>
           
           
            
-           
-          <div class="large-4 pull-9 columns">
-              <div style="  border: 1px solid #B9B0B9;
-  padding: 10px;">
-                <div  id="rostros" style="  width: 282px;
-  height: 282px;" >
-                </div>
+           <div class="columns" style="width: 185px;
+              height: 335px;
+              border: 1px solid #E6E8E6;
+              border-radius: 28px;
+              padding-top: 10px;
+              padding-left: 31px;
+              padding-right: 31px;">
+
+              <div class="elementos_izq_componentes fondo_imagen_activo">
+                <div class="fondo_imagen"><img src="img/iconos_lateral/c1.png" alt=""></div>
+                <p class="descripcion_imagen_componentes">cara</p>
               </div>
-            
-              
-          </div>
+
+               <div class="elementos_izq_componentes ">
+                <div class="fondo_imagen"><img src="img/iconos_lateral/c2.png" alt=""></div>
+                <p class="descripcion_imagen_componentes">ropa</p>
+              </div>
+
+               <div class="elementos_izq_componentes ">
+                <div class="fondo_imagen"><img src="img/iconos_lateral/c3.png" alt=""></div>
+                <p class="descripcion_imagen_componentes">armadura</p>
+              </div>
+
+           </div>
+           
+          
           
         </div>
           
         
          
         
-        <footer class="row">
-          <div class="large-12 columns">
-            <hr/>
-            <div class="row">
-              <div class="large-6 columns">
-                <p>© Copyright no one at all. Go to town.</p>
-              </div>
-              <div class="large-6 columns">
-                <ul class="inline-list right">
-                  <li><a href="#">Section 1</a></li>
-                  <li><a href="#">Section 2</a></li>
-                  <li><a href="#">Section 3</a></li>
-                  <li><a href="#">Section 4</a></li>
-                </ul>
-              </div>
-            </div>
-          </div> 
-        </footer>
+      
 
 
 
     <script>
-      $(document).foundation();
+      $(document).foundation({
+        orbit: {
+          animation: 'slide',
+         // timer_speed: 1000,
+          pause_on_hover: false,
+        // animation_speed: 500,
+          navigation_arrows: true,
+          bullets: true,
+           slide_number: false,
+            resume_on_mouseout: false,
+            next_on_click: false,
+             timer: false,
+          
+        }
+      });
+
+      $("#opciones_dise").on("after-slide-change.fndtn.orbit", function(event, orbit) {
+          $(".parte_activa").removeClass("parte_activa");
+         $("[data-bton="+(orbit.slide_number+1)+"]").addClass("parte_activa");
+    });
     </script>
 
         <script src="js/datos.js"></script>
