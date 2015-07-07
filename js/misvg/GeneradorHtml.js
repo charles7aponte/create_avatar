@@ -150,20 +150,27 @@ function GeneradorHtml (){
 				break;
 
 
+
 				case "4":
+					nombre="nariz";
+				break;
+
+
+				case "5":
 					nombre="boca";
 				break;
 
-				case "5":
+
+				case "6":
 					nombre="oreja";
 				break;
 
-				case "6":
+				case "7":
 					nombre="cabello";
 				break;
 
 
-				case "7":
+				case "8":
 					nombre="barba";
 				break;
 

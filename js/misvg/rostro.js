@@ -5,6 +5,9 @@ function Rostro(){
 	contenedor:'null'
 
 
+  ,URL_SERVIDOR:""
+  ,id_res_actualizar:null
+
 	,id_contenedor:'null'
 	,mi_cuerpo_svg:null
 	,mi_forma_svg:null
@@ -27,8 +30,7 @@ function Rostro(){
 		,'ojos':'n1'
 		,'nariz':'n1'
 		,'boca':'n1'
-		,'cabello':'n1'
-		,'nariz':'n1'
+		,'cabello':'n1'	
 		,'barba':'n1'
 		,'expresion':'n1'
 
@@ -39,7 +41,6 @@ function Rostro(){
 		,'nariz_1':'cargar'
 		,'boca_1':'cargar'
 		,'cabello_1':'cargar'
-		,'nariz_1':'cargar'
 		,'barba_1':'cargar'
 		,'expresion_1':'cargar'
 	}
@@ -49,6 +50,7 @@ function Rostro(){
 	,color_ceja_svg_i:null
 	,color_ojos_svg_i:null
 	,color_cabello_svg_i:null
+	,color_boca_svg_i:null
 	//,color_barba_svg_i:null
 
 
@@ -75,7 +77,7 @@ function Rostro(){
 
 
 		_seft.cargaSVGSeleccionado("cuerpo","c1","cargar");		
-		_seft.cargaSVGSeleccionado("expresion","n1","cargar");
+	
 		_seft.cargaDatosAvatar();
 
 
@@ -92,15 +94,17 @@ function Rostro(){
   	**/
   	,cargaDatosAvatar:function(){
   		var _seft= this;
-  		
-		_seft.cargaSVGSeleccionado("oreja",_seft.datos.oreja,_seft.datos.oreja_1);
-		_seft.cargaSVGSeleccionado("ceja",_seft.datos.ceja,_seft.datos.ceja_1);
-		_seft.cargaSVGSeleccionado("ojos",_seft.datos.ojos,_seft.datos.ojos_1);
-		_seft.cargaSVGSeleccionado("nariz",_seft.datos.nariz,_seft.datos.nariz_1);
-		_seft.cargaSVGSeleccionado("boca",_seft.datos.boca,_seft.datos.boca_1);
-		_seft.cargaSVGSeleccionado("cabello",_seft.datos.cabello,_seft.datos.cabello_1);
-		_seft.cargaSVGSeleccionado("barba",_seft.datos.barba,_seft.datos.barba_1);
-		_seft.cargaSVGSeleccionado("forma",_seft.datos.forma,_seft.datos.forma_1);
+
+
+    _seft.cargaSVGSeleccionado("expresion","n1","cargar");   		
+		_seft.cargaSVGSeleccionado("oreja",_seft.datos.oreja, _seft.datos.oreja_1);
+		_seft.cargaSVGSeleccionado("ceja",_seft.datos.ceja, _seft.datos.ceja_1);
+		_seft.cargaSVGSeleccionado("ojos",_seft.datos.ojos, _seft.datos.ojos_1);
+		_seft.cargaSVGSeleccionado("nariz",_seft.datos.nariz, _seft.datos.nariz_1);
+		_seft.cargaSVGSeleccionado("boca",_seft.datos.boca, _seft.datos.boca_1);
+		_seft.cargaSVGSeleccionado("cabello",_seft.datos.cabello, _seft.datos.cabello_1);
+		_seft.cargaSVGSeleccionado("barba",_seft.datos.barba, _seft.datos.barba_1);
+		_seft.cargaSVGSeleccionado("forma",_seft.datos.forma, _seft.datos.forma_1);
   	}
 
 
@@ -172,7 +176,7 @@ function Rostro(){
 
   			//boca
   			case "boca":
-  				//_seft.color_forma_svg = objeto_color;
+  				_seft.color_boca_svg_i = posicion_color;
   			break;
 
 
@@ -181,6 +185,7 @@ function Rostro(){
   		 console.log(" forma "+_seft.color_forma_svg_i  );
   		 console.log(" ojos "+_seft.color_ojos_svg_i  );
   		 console.log(" cabello "+_seft.color_cabello_svg_i  );
+  		 console.log(" cabello "+_seft.color_boca_svg_i  );
 
   		return null;
 
@@ -202,6 +207,8 @@ function Rostro(){
   			case "forma":
   			case "nariz":
   			case "oreja":
+        case "expresion":
+  			
   				if(_seft.color_forma_svg_i)
   					return  _seft.GeneradorHtml.colores[_seft.color_forma_svg_i] ;
 
@@ -217,15 +224,18 @@ function Rostro(){
   			case "ceja":
   			case "cabello":
   			case "barba":
-  			  
+
   				if(_seft.color_cabello_svg_i)
   					return _seft.GeneradorHtml.colores[_seft.color_cabello_svg_i];
   			break;
 
-  			//boca
-  			case "boca":
-  				//_seft.color_forma_svg = objeto_color;
+
+
+			case "boca":
+  				if(_seft.color_boca_svg_i)
+  					return _seft.GeneradorHtml.colores[_seft.color_boca_svg_i];
   			break;
+  			
 
   		}
 
@@ -511,6 +521,45 @@ function Rostro(){
 
 
 
+    /********
+    ** inicia la lectura de datos por parametro , y carga los datos remotos
+     ***/
+     ,enlazaLecturaRemota:function(){
+
+        var _seft=this;
+        setTimeout(function(){
+          
+          var parametros= _seft.getGET();
+          try{
+            _seft.id_res_actualizar =parametros["nid"];
+          } catch(e){
+
+          }
+
+          if(_seft.id_res_actualizar)
+          {
+            _seft.leerRemotaJson();
+
+          }
+
+        },500);
+
+     }// enlazaLecturaRemota
+
+
+
+    ,getGET:function(){
+          var url= location.search.replace("?", "");
+          var arrUrl = url.split("&");
+          var urlObj={};   
+          for(var i=0; i<arrUrl.length; i++){
+              var x= arrUrl[i].split("=");
+              urlObj[x[0]]=x[1]
+          }
+          return urlObj;
+      }
+
+
 
   	/***************
   	* genera los img para visualizar los iconos de las persona
@@ -535,6 +584,187 @@ function Rostro(){
 
 
 
+
+    /**************
+    * guarda los datos .. 
+    *
+    ****/
+    ,guardaFormaRemota:function(){
+      var _seft=this;
+
+      $.ajax({
+        method: "POST",
+        dataType:'json',
+        url: _seft.URL_SERVIDOR+"servicios/guardar.php",
+        data:{
+          nid:_seft.id_res_actualizar,
+          text:_seft.getStringData()
+
+        },
+        // resulto todo bien
+        success:function(data){
+          if(data && data.respuesta)
+          {
+            if(data.id)
+            {
+              _seft.id_res_actualizar= data.id;
+            }
+            alert("se guardado");
+
+          }
+          else {
+            alert("Ohh!! paso algo");
+          }
+        }
+        ,error:function(){
+          alert("Error en el servidor");
+        }
+
+
+
+      });
+
+    }// fin function guardaFormaRemota
+
+    /*******
+    *** crear el string de guardado
+    ******/
+    ,getStringData:function(){
+
+      var _seft= this;
+    
+    var mistring="";  
+    mistring="{" 
+    +"  datos:{"
+    +" 'forma':'"+_seft.datos.forma+"'"
+    +",'oreja':'"+_seft.datos.oreja+"'"
+    +",'ceja':'"+_seft.datos.ceja+"'"
+    +" ,'ojos':'"+_seft.datos.ojos+"'"
+    +",'nariz':'"+_seft.datos.nariz+"'"
+    +",'boca':'"+_seft.datos.boca+"'"
+    +",'cabello':'"+_seft.datos.cabello+"'"
+    
+    +" ,'barba':'"+_seft.datos.barba+"'"
+    +",'expresion':'"+_seft.datos.expresion+"'"
+
+    +"  ,'forma_1':'"+_seft.datos.forma_1+"'"
+    +",'oreja_1':'"+_seft.datos.oreja_1+"'"
+    +",'ceja_1':'"+_seft.datos.ceja_1+"'"
+    +",'ojos_1':'"+_seft.datos.ojos_1+"'"
+    +" ,'nariz_1':'"+_seft.datos.nariz_1+"'"
+    +" ,'boca_1':'"+_seft.datos.boca_1+"'"
+    +" ,'cabello_1':'"+_seft.datos.cabello_1+"'"
+    
+    +" ,'barba_1':'"+_seft.datos.barba_1+"'"
+    +" ,'expresion_1':'"+_seft.datos.expresion_1+"'"
+    +" }"
+
+
+      +",color:{"
+      +"color_forma_svg_i:"+_seft.color_forma_svg_i+""
+      +",color_ceja_svg_i:"+_seft.color_ceja_svg_i+""
+      +",color_ojos_svg_i:"+_seft.color_ojos_svg_i+""
+      +",color_cabello_svg_i:"+_seft.color_cabello_svg_i+""
+      +",color_boca_svg_i:"+_seft.color_boca_svg_i+""
+      +"}"
+    +"}";
+
+    var gato=null;
+     eval("gato="+mistring);
+     console.log(gato);
+    return mistring;
+    }// fin getStringData
+
+
+
+    /*********
+    ** enlaza html con el boton de guardad
+    ***/
+    ,enlazaBtonGuardar:function(id_boton){
+
+      var _seft=this;
+      $(id_boton).click(function(){
+           _seft.guardaFormaRemota();
+      });
+         
+    }// fin function enlazaBtonGuardar
+
+
+
+    /**********
+    *** leer los datos si esta 
+    ***
+    ***/
+    ,leerRemotaJson:function(){
+      var _seft=this;
+
+        $.ajax({
+           method: "POST",
+          dataType:'json',
+          url: _seft.URL_SERVIDOR+"servicios/cargar.php",
+          data:{
+            nid:_seft.id_res_actualizar
+          }
+           
+          ,success:function(data){
+            if(data)
+            {
+                _seft.tomaStrignCarga(data.datos);
+
+            }
+            else {
+              alert("el servidor envio mal los datos");
+            }
+
+          }
+          ,error:function(){
+            alert("error en la conexion");
+
+          }
+        });
+
+
+
+
+    }// leerRemotaJson
+
+
+
+
+    /**********
+    ** toma el string y lo combierte 
+    **
+    ***/
+    ,tomaStrignCarga:function(mi_string)
+    {
+      var datos= null;
+      var _seft=this;
+      
+      try
+      {
+        eval("datos="+mi_string);
+      }
+      catch(e)
+      {
+        alert("el text de string esta mal!");
+      }
+
+      
+      if(datos)
+      {
+        _seft.datos = datos.datos;
+
+        _seft.color_forma_svg_i=""+datos.color.color_forma_svg_i;
+        _seft.color_ceja_svg_i=""+datos.color.color_ceja_svg_i;
+        _seft.color_ojos_svg_i=""+datos.color.color_ojos_svg_i;
+        _seft.color_cabello_svg_i=""+datos.color.color_cabello_svg_i;
+        _seft.color_boca_svg_i=""+datos.color.color_boca_svg_i;
+
+
+        _seft.cargaDatosAvatar(); 
+      }
+
+    }// fin function tomaStrignCarga
 
   };
 };
