@@ -4,7 +4,7 @@ function Rostro(){
 //variables
 	contenedor:'null'
 
-
+  ,tipoRostro: 1 // 1 es modo edicion , 2 , modo muestra ... solo muestra
   ,URL_SERVIDOR:""
   ,id_res_actualizar:null
 
@@ -55,37 +55,65 @@ function Rostro(){
 
 
 
+  /*******
+  ** clonar datos principales para la reulizacion 
+  */
+  ,clonarPrincipales:function(Rostro)
+  {
+    var _seft= this;
+
+    _seft.datos = Rostro.datos;
+    _seft.color_forma_svg_i=Rostro.color_forma_svg_i;
+    _seft.color_ceja_svg_i=Rostro.color_ceja_svg_i;
+    _seft.color_ojos_svg_i=Rostro.color_ojos_svg_i;
+    _seft.color_cabello_svg_i=Rostro.color_cabello_svg_i;
+    _seft.color_boca_svg_i=Rostro.color_boca_svg_i;
+
+  }// fin clonarPrincipales
+
+
+
 /// funciones
   	,init:function()
   	{
-  		var _seft= this;
-  		_seft.contenedor = Snap("#"+_seft.id_contenedor);
-		_seft.contenedor.attr({height: '100%',
-  			width: '100%'});
-		_seft.mi_cuerpo_svg = _seft.contenedor.select("#mi_cuerpo");
-		_seft.mi_forma_svg = _seft.contenedor.select("#mi_forma");
-		_seft.mi_oreja_svg = _seft.contenedor.select("#mi_oreja");
-		_seft.mi_ceja_svg = _seft.contenedor.select("#mi_ceja");
-		_seft.mi_ojos_svg = _seft.contenedor.select("#mi_ojos");
-		_seft.mi_boca_svg = _seft.contenedor.select("#mi_boca");
-		_seft.mi_cabello_svg = _seft.contenedor.select("#mi_cabello");
+  		
+      var _seft= this;
 
-		_seft.mi_nariz_svg = _seft.contenedor.select("#mi_nariz");
-		_seft.mi_barba_svg = _seft.contenedor.select("#mi_barba");
-		_seft.mi_expresion_svg = _seft.contenedor.select("#mi_expresion");
+    	_seft.contenedor = Snap("#"+_seft.id_contenedor);
+  		_seft.contenedor.attr({height: '100%',
+    			width: '100%'});
+  		_seft.mi_cuerpo_svg = _seft.contenedor.select(".mi_cuerpo");
+  		_seft.mi_forma_svg = _seft.contenedor.select(".mi_forma");
+  		_seft.mi_oreja_svg = _seft.contenedor.select(".mi_oreja");
+  		_seft.mi_ceja_svg = _seft.contenedor.select(".mi_ceja");
+  		_seft.mi_ojos_svg = _seft.contenedor.select(".mi_ojos");
+  		_seft.mi_boca_svg = _seft.contenedor.select(".mi_boca");
+  		_seft.mi_cabello_svg = _seft.contenedor.select(".mi_cabello");
 
-
-
-		_seft.cargaSVGSeleccionado("cuerpo","c1","cargar");		
-	
-		_seft.cargaDatosAvatar();
+  		_seft.mi_nariz_svg = _seft.contenedor.select(".mi_nariz");
+  		_seft.mi_barba_svg = _seft.contenedor.select(".mi_barba");
+  		_seft.mi_expresion_svg = _seft.contenedor.select(".mi_expresion");
 
 
 
-		_seft.generacionImg();
-		_seft.enlazarEventosEstilos();
-		_seft.enlazaCambioColor();  		
-  	}//fin de init
+  		_seft.cargaSVGSeleccionado("cuerpo","c1","cargar");		
+  	
+  		_seft.cargaDatosAvatar();
+
+      if(_seft.tipoRostro==1)
+      {
+    		_seft.generacionImg();
+    		_seft.enlazarEventosEstilos();
+    		_seft.enlazaCambioColor();  		
+      	
+      }
+
+    }//fin de init
+
+
+
+
+
 
 
 
@@ -105,7 +133,8 @@ function Rostro(){
 		_seft.cargaSVGSeleccionado("cabello",_seft.datos.cabello, _seft.datos.cabello_1);
 		_seft.cargaSVGSeleccionado("barba",_seft.datos.barba, _seft.datos.barba_1);
 		_seft.cargaSVGSeleccionado("forma",_seft.datos.forma, _seft.datos.forma_1);
-  	}
+  	
+    }
 
 
   	/*********
@@ -259,7 +288,8 @@ function Rostro(){
   	*/
   	, urlRelativo:function(tipo)
   	{
-  		return "img/svg/"+tipo+"/";
+      var _seft= this;
+  		return   _seft.URL_SERVIDOR+"img/svg/"+tipo+"/";
  
   	}// fin urlRelativo
 

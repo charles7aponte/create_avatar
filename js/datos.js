@@ -21,3 +21,14 @@ rostro.init();
 rostro.enlazaLecturaRemota();// carga los parametros y encaso consulta los datos
 
 
+
+function cargarOtroDiv(id_elemento){
+	var rostroAuxiliar = Rostro();
+	rostroAuxiliar.clonarPrincipales(rostro);
+
+	rostroAuxiliar.GeneradorHtml = miGeneradorHtml;
+	rostroAuxiliar.URL_SERVIDOR = rostro.URL_SERVIDOR;// 
+	rostroAuxiliar.id_contenedor = ""+id_elemento;
+	rostroAuxiliar.init();
+
+}

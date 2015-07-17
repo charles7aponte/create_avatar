@@ -14,7 +14,17 @@ function GeneradorHtml (){
 
 				,["#92C020",
 				"#CEFF2D"
-				],
+				]
+
+				,[
+				"#EABBD8",
+				"#FFCEF2"
+				]
+
+				,[
+					"#F5B0CB",
+					"#FFBCDC"
+				]
 
 			]
 
