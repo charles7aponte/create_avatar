@@ -16,7 +16,7 @@ rostro.URL_SERVIDOR="";// direccion del servidor
 rostro.enlazaBtonGuardar("#guardar_avatar");
 
 
-rostro.id_contenedor ="rostro";
+rostro.id_contenedor ="rostros";
 rostro.init();
 rostro.enlazaLecturaRemota();// carga los parametros y encaso consulta los datos
 

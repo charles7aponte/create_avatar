@@ -73,13 +73,46 @@ function Rostro(){
 
 
 
+
+
+
+
 /// funciones
+
+    ,generacionSVG:function(){
+        
+         var _seft=this;
+
+         var html=' <svg version="1.1" id="_svg_'+_seft.id_contenedor+'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="211px" height="228.77px" viewBox="0 0 211 228.77" enable-background="new 0 0 211 228.77" xml:space="preserve"> '
+         +'           <g class="mi_cuerpo"></g> '
+         +'           <g class="mi_forma"></g> '
+         +'           <g class="mi_expresion"></g>    '
+         +'           <g class="mi_oreja"></g> '
+         +'           <g class="mi_ojos"></g> '
+         +'           <g class="mi_ceja"></g> '
+         +'           <g class="mi_boca"></g> '
+         +'           <g class="mi_barba"></g> '
+         +'           <g class="mi_nariz"></g> '
+         +'           <g class="mi_cabello"></g>  '                    
+                   
+         +'       </svg> ';
+
+
+         return html;
+
+    }// fin generacionSVG
+
+
   	,init:function()
   	{
   		
       var _seft= this;
 
-    	_seft.contenedor = Snap("#"+_seft.id_contenedor);
+     var html= _seft.generacionSVG();
+
+     $("#"+_seft.id_contenedor).html(html);
+
+    	_seft.contenedor = Snap("#_svg_"+_seft.id_contenedor);
   		_seft.contenedor.attr({height: '100%',
     			width: '100%'});
   		_seft.mi_cuerpo_svg = _seft.contenedor.select(".mi_cuerpo");
