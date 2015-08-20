@@ -82,7 +82,7 @@ function Rostro(){
     ,generacionSVG:function(){
         
          var _seft=this;
-
+          
          var html=' <svg version="1.1" id="_svg_'+_seft.id_contenedor+'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="211px" height="228.77px" viewBox="0 0 211 228.77" enable-background="new 0 0 211 228.77" xml:space="preserve"> '
          +'           <g class="mi_cuerpo"></g> '
          +'           <g class="mi_forma"></g> '
@@ -95,7 +95,8 @@ function Rostro(){
          +'           <g class="mi_nariz"></g> '
          +'           <g class="mi_cabello"></g>  '                    
                    
-         +'       </svg> ';
+         +'       </svg> '
+         +'<img class="mi_preload_rostros" src="'+_seft.URL_SERVIDOR+'img/silueta.gif" style="display:none;position: relative;top: 1%;"> ';
 
 
          return html;
@@ -590,6 +591,22 @@ function Rostro(){
      ,enlazaLecturaRemota:function(){
 
         var _seft=this;
+       
+         var parametros_= _seft.getGET();
+         try{
+            if(parametros_["nid"])
+            {
+              // va a cargar datos de la edicion
+              $("img.mi_preload_rostros").show();
+             $('#_svg_'+_seft.id_contenedor).hide();
+            }
+
+            
+          } catch(e){
+
+          }
+                 
+       
         setTimeout(function(){
           
           var parametros= _seft.getGET();
@@ -761,6 +778,9 @@ function Rostro(){
     ,leerRemotaJson:function(){
       var _seft=this;
 
+      
+
+
         $.ajax({
            method: "POST",
           dataType:'json',
@@ -774,6 +794,9 @@ function Rostro(){
             {
                 _seft.tomaStrignCarga(data.datos);
 
+                  
+                  $("img.mi_preload_rostros").hide();
+                  $('#_svg_'+_seft.id_contenedor).show();
             }
             else {
               alert("el servidor envio mal los datos");
@@ -783,6 +806,11 @@ function Rostro(){
           ,error:function(){
             alert("error en la conexion");
 
+          },
+          beforeSend:function()
+          {
+           
+          
           }
         });
 
